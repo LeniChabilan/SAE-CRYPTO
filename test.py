@@ -57,7 +57,7 @@ def casse_brutal(message_clair, message_chiffre):
 
 message_clair = "hello"
 cle1 = 0000000000
-cle2 = 1111
+cle2 = 111111
 
 message_chiffre = chifrementSDES(message_clair, cle1, cle2)
 print(message_chiffre)
@@ -88,3 +88,28 @@ cle_trouvee4 , cle_trouve3 = cassage_astucieux(message_clair, message_chiffre)
 time2=time.time()
 print(time2-time1)
 print("Clé trouvée :", cle_trouvee4 , cle_trouve3)
+
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+def encrypt_data(data, key):
+    cipher = AES.new(key, AES.MODE_EAX)
+    ciphertext = cipher.encrypt(data)
+    return ciphertext, cipher.nonce
+
+def decrypt_data(ciphertext, key,nonce):
+    decipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+    decrypted_data = decipher.decrypt(ciphertext)
+    return decrypted_data
+
+# Example usage
+data = b'secret data'
+key = get_random_bytes(32)
+
+# Encryption
+encrypted_data,nonce = encrypt_data(data, key)
+print("Encrypted Data:", encrypted_data)
+
+# Decryption
+decrypted_data = decrypt_data(encrypted_data, key,nonce)
+print("Decrypted Data:", decrypted_data)
