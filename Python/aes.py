@@ -26,6 +26,3 @@ print("Text Décrypté:", text_decrypté)
 
 
 
-# 2**256
-
-# 10**9

@@ -2,8 +2,9 @@ from DES import *
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
-import os
 import time
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
 
 from binascii import unhexlify
 from scapy.all import *
@@ -99,7 +100,6 @@ cle_trouvee4 , cle_trouve3 = cassage_astucieux(message_clair, message_chiffre)
 time2=time.time()
 print(time2-time1)
 print("Clé trouvée :", cle_trouvee4 , cle_trouve3)
-
 
 
 
